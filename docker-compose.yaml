@@ -1,7 +1,11 @@
-version: '3.9'
-
+version: '3.8'
 services:
-  web:
-    image: 'jaydeep007docker/my-node-app:latest'
+  app:
+    image: ${IMAGE_NAME:-my-nodejs-app}:latest
+    container_name: my-nodejs-app
     ports:
-      - "8000:8000"
+      - "${HOST_PORT:-80}:8000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
